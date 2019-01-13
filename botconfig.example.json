@@ -1,3 +1,8 @@
 {
-    "token": "Your Discord Secret here"
+    "token": "El token del bot de discord",
+    "prefix": "+",
+    "host": "lugar a hostear, ejemplo:localhost",
+    "user": "usuario",
+    "password": "contraseña",
+    "database": "base de datos"
 }
