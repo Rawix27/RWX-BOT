@@ -30,7 +30,8 @@ var con = mysql.createConnection({
   host: botconfig.host,
   user: botconfig.user,
   password: botconfig.password,
-  database: botconfig.database
+  database: botconfig.database,
+  port: botconfig.port
 })
 
 con.connect(err => {

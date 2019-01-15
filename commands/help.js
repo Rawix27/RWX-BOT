@@ -25,9 +25,6 @@ let result = jsfiles.forEach((f, i) => {
     desclist = props.help.description;
     usage = props.help.usage;
 
-    // send help text
-    // OLD USE message.author.send(`**${namelist}** \n${desclist} \n${usage}`);
-    //const commandshelp = new Discord.RichEmbed()
     commandshelp
     .addField(`${usage}`, `${namelist}`)
 

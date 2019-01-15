@@ -4,5 +4,6 @@
     "host": "lugar a hostear, ejemplo:localhost",
     "user": "usuario",
     "password": "contraseña",
-    "database": "base de datos"
+    "database": "base de datos",
+	"port": "puerto default 3306"
 }

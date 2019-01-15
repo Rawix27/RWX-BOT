@@ -3,7 +3,7 @@ const ms = require("ms");;
 const moment = require('moment');
 var matchmakinggg = require("./matchmakingban.js");
 
-const date = moment().format('lll');
+var date = moment().format('lll');
 
 const botconfig = require("../botconfig.json");
 const mysql = require("mysql");
@@ -14,10 +14,10 @@ var con = mysql.createConnection({
   host: botconfig.host,
   user: botconfig.user,
   password: botconfig.password,
-  database: botconfig.database
+  database: botconfig.database,
+  port: botconfig.port
 })
 
-// const dateUnban = moment(date).add(mutetime).format('lll'); // ACA NO FUNCIONA, TIENE QUE IR DEBAJO de MUTETIME
 
 
 
@@ -28,7 +28,6 @@ module.exports.run = async (bot, message, args) => {
 
  if(miembroStaff){
 
-  //+mmban @user 1s/m/h/d
 
   let userinfo = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   if(!userinfo) return message.reply("No se ha mencionado al usuario.");
@@ -39,7 +38,6 @@ module.exports.run = async (bot, message, args) => {
  con.query(`SELECT * FROM bans WHERE id = '${userinfo.id}'`, (err, rows) => {
   if(err) throw err;
   let sql;
-       //TRY ADDING THIS LINE RIGHT HERE
   if(rows.length < 1){
       message.reply("El usuario mencionado no tiene registrado baneos");
   } else {
@@ -49,17 +47,14 @@ module.exports.run = async (bot, message, args) => {
   const removeBan = new Discord.RichEmbed()
   .setTitle('BAN REMOVIDO')
   .setColor(0x1436B8)
-  //  .setDescription(`*El usuario <@${userinfo.id}> ha sido baneado: ${matchmakinggg.numerodebaneos} veces*`)
   .addField(`Usuario:`, `<@${userinfo.id}>`)
   .addField(`Nueva cantidad de baneos:`, `${bans - 1}`)
   //.addField(`Estado actual:`, `${}`)
-  //  .addField(`Fecha del ultimo baneo:`, `${matchmakinggg.dateBan}`)
   .setThumbnail('https://i.imgur.com/8kqz8bf.png')
   .setFooter('Removido por: '+message.author.tag, message.author.displayAvatarURL)
-  // Send the embed to the same channel as the message
-  // message.channel.send(embedBan1);
+  // Send the message to a specific channel
   // message.channel.find("name", "matchmaking-bans");
-  //console.log(bans);
+  // console.log(bans);
   message.channel.send(removeBan);
   }
   
