@@ -5,5 +5,5 @@
     "user": "usuario",
     "password": "contraseña",
     "database": "base de datos",
-	"port": "puerto default 3306"
+	"port": "default:3306"
 }
