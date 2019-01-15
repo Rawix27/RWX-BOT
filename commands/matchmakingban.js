@@ -6,12 +6,6 @@ const moment = require('moment')
 const botconfig = require("../botconfig.json");
 const mysql = require("mysql");
 
-var date = moment().format('lll');
-let numerodebaneos = 0;
-let dateBan = moment(date).format('lll');
-exports.numerodebaneos = numerodebaneos;
-exports.dateBan = dateBan;
-
 var con = mysql.createConnection({
   host: botconfig.host,
   user: botconfig.user,
@@ -23,7 +17,6 @@ var con = mysql.createConnection({
 module.exports.run = async (bot, message, args) => {
 
   let miembroStaff = message.member.roles.find("name", "Staff");
-
 
   if (miembroStaff) {
 
@@ -59,18 +52,18 @@ module.exports.run = async (bot, message, args) => {
      const meses = 'M';
      const años = 'y'; */
 
-
+    let date = moment().format('lll');
+    let dateBan = moment(date).format('lll');
     const TIEMPO = parseInt(mutetime, 10);
     var UNIDAD = mutetime[mutetime.length - 1];
-    console.log(UNIDAD);
-    var dateUnban = moment(date).add(TIEMPO, UNIDAD).format('lll'); // ACA SI FUNCIONA
+    //console.log(UNIDAD);
+    let dateUnban = moment(date).add(TIEMPO, UNIDAD).format('lll'); // ACA SI FUNCIONA
 
     let reason = args.slice(2).join(" ");
 
     await (tomute.removeRole(muterole.id));
 
     exports.tomute = tomute;
-    exports.tomuteestadoBan = tomute.estadoBan;
 
     con.query(`SELECT bans FROM bans WHERE id = '${tomute.id}'`, (err, rows) => {
       if (err) throw err;
@@ -144,6 +137,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
   name: "mmban",
-  description: "Ban an user from the matchmaking channel",
-  usage: "+mmban @user 'tiempo' 'razon'"
+  description: "Banea a un usuario del canal matchmaking",
+  usage: "+mmban [@user] [tiempo] [razon]"
 }

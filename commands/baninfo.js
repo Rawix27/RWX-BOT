@@ -25,22 +25,26 @@ module.exports.run = async (bot, message, args) => {
 
  let miembroStaff = message.member.roles.find("name", "Staff");
 
-
  if(miembroStaff){
-
 
   let userinfo = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   if(!userinfo) return message.reply("No se ha mencionado al usuario.");
   //if(!bot.hasPermission("MANAGE_MESSAGES")) return message.reply("El BOT necesita los siguientes permisos: ADMINISTRAR ROLES");
  // if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");  
   
+ let userbanned = userinfo.roles.find("name", "Matchmaking");
+
+if(userbanned==null)
+  userbanned='BANEADO';
+else
+  userbanned='NO BANEADO';
 
  
 
  con.query(`SELECT * FROM bans WHERE id = '${userinfo.id}'`, (err, rows) => {
   if(err) throw err;
   let sql;
-  if(rows.length < 1){
+  if(rows.length < 1 || rows[0].bans == 0){
     message.reply("El usuario mencionado no tiene registrado baneos");
   } else{
     let bans = rows[0].bans;
@@ -52,18 +56,18 @@ module.exports.run = async (bot, message, args) => {
   .setColor(0x1436B8)
   .addField(`Usuario:`, `<@${userinfo.id}>`)
   .addField(`Cantidad de baneos:`, `${bans}`)
-  //.addField(`Estado actual:`, `${}`)
+  .addField(`Estado actual:`, `${userbanned}`)
   .addField(`Fecha del ultimo baneo:`, `${ultimoban}`)
   .setThumbnail('https://i.imgur.com/8kqz8bf.png')
   .setFooter('Requerido por: '+message.author.tag, message.author.displayAvatarURL)
   // Send the message to a specific channel
   // message.channel.find("name", "matchmaking-bans");
-  console.log(bans);
+  // console.log(bans);
   message.channel.send(infoBan);
 
   }
   
-  con.query(sql, console.log);
+  con.query(sql);
   });
 
   
@@ -79,6 +83,6 @@ if(!miembroStaff) return message.reply("No tenes los permisos suficientes")
 
 module.exports.help = {
   name: "baninfo",
-  description: "See info about the bans of a player",
-  usage: "+baninfo @user"
+  description: "Muestra informacion sobre los baneos de un usuario",
+  usage: "+baninfo [@user]"
 }

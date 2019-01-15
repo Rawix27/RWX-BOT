@@ -26,7 +26,7 @@ let result = jsfiles.forEach((f, i) => {
     usage = props.help.usage;
 
     commandshelp
-    .addField(`${usage}`, `${namelist}`)
+    .addField(`${usage}`, `${desclist}`)
 
     
     
@@ -43,6 +43,6 @@ message.reply("Revisa los mensajes privados para mas informacion");
 
 module.exports.help = {
     name: "help",
-    description: "Display all the commands in a private message",
+    description: "Muestra todos los comandos disponibles en un mensaje privado",
     usage: "+help"
   }

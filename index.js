@@ -13,7 +13,7 @@ fs.readdir("./commands/", (err, files) => {
   if(err) console.log(err);
   let jsfile = files.filter(f => f.split(".").pop() === "js")
   if(jsfile.length <= 0){
-    console.log("Couldn't find commands.");
+    console.log("No se han encontrado comandos");
     return;
   }
 
@@ -37,14 +37,14 @@ var con = mysql.createConnection({
 con.connect(err => {
   if(err) throw err;
   console.log("Conectado a la base de datos");
-  con.query("SHOW TABLES", console.log);
+  con.query("SHOW TABLES");
 })
 
 
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} esta funcionando en ${bot.guilds.size} servers!`); //Muestra en consola la cantidad de servidores en donde el bot esta funcionando
-  bot.user.setActivity("RAWIXBOT | +help", {type: "PLAYING"}); //Establece el estado del bot a JUGANDO o MIRANDO
+  bot.user.setActivity("RWXBOT | +help", {type: "PLAYING"}); //Establece el estado del bot a JUGANDO o MIRANDO
 
 });
 

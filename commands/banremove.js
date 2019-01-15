@@ -58,7 +58,7 @@ module.exports.run = async (bot, message, args) => {
   message.channel.send(removeBan);
   }
   
-  con.query(sql, console.log);
+  con.query(sql);
   });
 
   
@@ -74,6 +74,6 @@ if(!miembroStaff) return message.reply("No tenes los permisos suficientes")
 
 module.exports.help = {
   name: "banremove",
-  description: "See info about the bans of a player",
-  usage: "+banremove @user"
+  description: "Remueve el baneo de un usuario",
+  usage: "+banremove [@user]"
 }
