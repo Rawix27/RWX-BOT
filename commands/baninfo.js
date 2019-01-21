@@ -32,14 +32,14 @@ module.exports.run = async (bot, message, args) => {
   //if(!bot.hasPermission("MANAGE_MESSAGES")) return message.reply("El BOT necesita los siguientes permisos: ADMINISTRAR ROLES");
  // if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");  
   
- let userbanned = userinfo.roles.find("name", "Matchmaking");
+ /* let userbanned = userinfo.roles.find("name", "Matchmaking");
 
 if(userbanned==null)
   userbanned='BANEADO';
 else
   userbanned='NO BANEADO';
 
- 
+ */
 
  con.query(`SELECT * FROM bans WHERE id = '${userinfo.id}'`, (err, rows) => {
   if(err) throw err;
@@ -56,7 +56,7 @@ else
   .setColor(0x1436B8)
   .addField(`Usuario:`, `<@${userinfo.id}>`)
   .addField(`Cantidad de baneos:`, `${bans}`)
-  .addField(`Estado actual:`, `${userbanned}`)
+  //.addField(`Estado actual:`, `${userbanned}`)
   .addField(`Fecha del ultimo baneo:`, `${ultimoban}`)
   .setThumbnail('https://i.imgur.com/8kqz8bf.png')
   .setFooter('Requerido por: '+message.author.tag, message.author.displayAvatarURL)
@@ -67,7 +67,7 @@ else
 
   }
   
-  con.query(sql);
+  //con.query(sql);
   });
 
   

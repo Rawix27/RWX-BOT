@@ -49,7 +49,7 @@ message.reply("Revisa los mensajes privados para mas informacion");
 
 
 module.exports.help = {
-    name: "help",
+    name: "info",
     description: "Muestra todos los comandos disponibles en un mensaje privado",
-    usage: "+help"
+    usage: "+info"
   }
