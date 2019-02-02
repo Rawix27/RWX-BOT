@@ -34,6 +34,7 @@ module.exports.run = async (bot, message, args) => {
   //if(!bot.hasPermission("MANAGE_MESSAGES")) return message.reply("El BOT necesita los siguientes permisos: ADMINISTRAR MENSAJES");
   //if(!bot.hasPermission("MANAGE_ROLES")) return message.reply("El BOT necesita los siguientes permisos: ADMINISTRAR ROLES");
  // if(tomute.hasPermission("MANAGE_MESSAGES")) return message.reply("Can't mute them!");  
+  let muterole = message.guild.roles.find(`name`, "Matchmaking");
   
  con.query(`SELECT * FROM bans WHERE id = '${userinfo.id}'`, (err, rows) => {
   if(err) throw err;
@@ -56,6 +57,7 @@ module.exports.run = async (bot, message, args) => {
   // message.channel.find("name", "matchmaking-bans");
   // console.log(bans);
   message.channel.send(removeBan);
+  userinfo.addRole(muterole.id);
   }
   
   con.query(sql);
