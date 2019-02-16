@@ -24,8 +24,10 @@ var con = mysql.createConnection({
 module.exports.run = async (bot, message, args) => {
 
  let miembroStaff = message.member.roles.find("name", "Staff");
+  
+ let miembroArbitro = message.member.roles.find("name", "Arbitro");
 
- if(miembroStaff){
+ if (miembroStaff || miembroArbitro) {
 
   let userinfo = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   if(!userinfo) return message.reply("No se ha mencionado al usuario.");
@@ -75,7 +77,7 @@ else
   //end of principal IF to check role
 }
 
-if(!miembroStaff) return message.reply("No tenes los permisos suficientes")
+if (!miembroStaff && !miembroArbitro) return message.reply("No tenes los permisos suficientes")
 
 
 //end of module
