@@ -10,8 +10,10 @@ const mysql = require("mysql");
 module.exports.run = async (bot, message, args) => {
 
   let miembroStaff = message.member.roles.find("name", "Staff");
+  
+  let miembroArbitro = message.member.roles.find("name", "Arbitro");
 
-  if (miembroStaff) {
+  if (miembroStaff || miembroArbitro) {
 
     let mutetime = args[0];
     if (!mutetime) return message.reply("Tiempo no especificado");
