@@ -1,5 +1,7 @@
 
 # HI, This is a readme for RWX-BOT (Node.js)
 Dependencies:
-* Moment.js
-* MySQL
+* moment.js
+* date.js
+* ytdl-core
+* ffmpeg
